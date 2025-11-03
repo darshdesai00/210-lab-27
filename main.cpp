@@ -1,12 +1,13 @@
 #include <iostream>
 #include <map>
-#include <vector>
 #include <tuple>
+#include <string>
 using namespace std;
 
 int main() {
     // declarations
-    string, tuple<int, map<string, string>> villagers;
+    map<string, tuple<int, string, string>> villagers;
+
 
     // insert elements into the map
     villagers["Audie"]   = make_tuple(5, "Dog", "Fluffly!!");
@@ -23,7 +24,7 @@ int main() {
 
     // access the map using iterators
     cout << "\nVillagers details (iterators):" << endl;
-    for (map<string, tuple,int, vector<string>>::iterator it = villagers.begin(); 
+    for (map<string, tuple<int, string, string>>::iterator it = villagers.begin(); 
         it != villagers.end(); ++it) {
         int friendship;
         string species, catchphrase;
@@ -33,24 +34,23 @@ int main() {
     }    
 
     // delete an element
-    villager.erase("Raymond");
+    villagers.erase("Raymond");
 
     // search for an element
     string searchKey = "Audie";
     auto it = villagers.find(searchKey);
     if (it != villagers.end()) {
         auto [f, s, c] = it->second;
-        cout << "\nFound " << searchKey << "'s favorite colors: ";
-        for (auto color : it->second)
-            cout << color << " ";
-        cout << endl;
-    } else
-        cout << endl << searchKey << " not found." << endl;
+        cout << "\nFound " << searchKey << ": [" << f << ", "
+             << s << ", " << c << "]" << endl;
+    } else {
+        cout << "\n" << searchKey << " not found." << endl;
+    }
 
     // report size, clear, report size again
-    cout << "\nSize before clear: " << villagerColors.size() << endl;
-    villagerColors.clear();
-    cout << "Size after clear: " << villagerColors.size() << endl;
+    cout << "\nSize before clear: " << villagers.size() << endl;
+    villagers.clear();
+    cout << "Size after clear: " << villagers.size() << endl;
 
     return 0;
 }
