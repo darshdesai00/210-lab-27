@@ -9,36 +9,37 @@ int main() {
     string, tuple<int, map<string, string>> villagers;
 
     // insert elements into the map
-    villagers["Audie"] = make_tuple{"Orange", "Yellow", "Red"};
-    villagers["Raymond"] = make_tuple{"Black", "Gray", "White"};
-    villagers.({"Marshal", {"Blue", "White", "Black"}});
+    villagers["Audie"]   = make_tuple(5, "Dog", "Fluffly!!");
+    villagers["Raymond"] = make_tuple(7, "Cat", "Purr!!");
+    villagers["Mitch"] = make_tuple(9, "Fox", "Reese");
 
     // access the map using a range-based for loop
-    cout << "Villagers and their favorite colors (range-based for loop):" << endl;
-    for (auto pair : villagerColors) {
-        cout << pair.first << ": ";
-        for (auto color : pair.second)
-            cout << color << " ";
-        cout << endl;
+    cout << "Villager details (range-based for loop):" << endl;
+    for (auto pair : villagers) {
+        auto [friendship, species, catchphrase] = pair.second;
+        cout << pair.first << " [" << friendship << ", "
+             << species << ", " << catchphrase << "]" << endl;
     }
 
     // access the map using iterators
-    cout << "\nVillagers and their favorite colors (iterators):" << endl;
-    for (map<string, vector<string>>::iterator it = villagerColors.begin(); 
-                                               it != villagerColors.end(); ++it) {
-        cout << it->first << ": ";
-        for (auto color : it->second)
-            cout << color << " ";
-        cout << endl;
-    }
+    cout << "\nVillagers details (iterators):" << endl;
+    for (map<string, tuple,int, vector<string>>::iterator it = villagers.begin(); 
+        it != villagers.end(); ++it) {
+        int friendship;
+        string species, catchphrase;
+        tie(friendship, species, catchphrase) = it->second;
+        cout << it->first << " [" << friendship << ", "
+             << species << ", " << catchphrase << "]" << endl;
+    }    
 
     // delete an element
-    villagerColors.erase("Raymond");
+    villager.erase("Raymond");
 
     // search for an element
     string searchKey = "Audie";
-    auto it = villagerColors.find(searchKey);
-    if (it != villagerColors.end()) {
+    auto it = villagers.find(searchKey);
+    if (it != villagers.end()) {
+        auto [f, s, c] = it->second;
         cout << "\nFound " << searchKey << "'s favorite colors: ";
         for (auto color : it->second)
             cout << color << " ";
