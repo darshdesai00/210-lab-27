@@ -1,3 +1,9 @@
+// COMSC-210 | Lab 27 | Darsh Desai
+// IDE used: VS Code (Mac)
+// Description: This program simulates a villager management system using std::map and std::tuple.
+// The user will be able to do the following add, delete, search, and modify villagers' friendship levels via a menu-driven interface.
+// It also has a bunch of key operations with std::map such as insert, erase, find, and iteration.
+
 #include <iostream>
 #include <map>
 #include <tuple>
@@ -28,16 +34,39 @@ int main() {
 
         do{
             cout << "\nMenu:\n";
-            cout << "1. Increase Friendship\n";
-            cout << "2. Decrease Friendship\n";
-            cout << "3. Search for Villager\n";
-            cout << "4. Exit\n";
+            cout << "1. Add Villager\n";
+            cout << "2. Delete Villager\n";
+            cout << "3. Increase Friendship\n";
+            cout << "4. Decrease Friendship\n";
+            cout << "5. Search for Villager\n";
+            cout << "6. Exit\n";
             cout << "Enter choice: ";
             cin >> choice; 
 
             if (choice == 1) {
+            string species, catchphrase;
+            int friendship;
+            cout << "Villager name: ";
+            cin >> ws;
+            getline(cin, name);
+            cout << "Friendship level (0-10): ";
+            cin >> friendship;
+            cout << "Species: ";
+            cin >> ws;
+            getline(cin, species);
+            cout << "Catchphrase: ";
+            cin >> ws;
+            getline(cin, catchphrase);
+            
+            villagers[name] = make_tuple(friendship, species, catchphrase);
+            cout << name << " added." << endl;
+            displayVillagers(villagers);
+        }
+
+            if (choice == 3) {
             cout << "Enter villager name to increase friendship: ";
-            cin >> name;
+            cin >> ws;
+            getline(cin, name);
             if (villagers.find(name) != villagers.end()) {
                 auto &[friendship, species, catchphrase] = villagers[name];
                 friendship++;
@@ -47,9 +76,10 @@ int main() {
             }
             displayVillagers(villagers);
         }
-            else if (choice == 2) {
+            else if (choice == 4) {
             cout << "Enter villager name to decrease friendship: ";
-            cin >> name;
+            cin >> ws;
+            getline(cin, name);
             if (villagers.find(name) != villagers.end()) {
                 auto &[friendship, species, catchphrase] = villagers[name];
                 if (friendship > 0) friendship--;
@@ -59,9 +89,10 @@ int main() {
             }
             displayVillagers(villagers);
         }
-            else if (choice == 3) {
+            else if (choice == 5) {
             cout << "Enter villager name to search: ";
-            cin >> name;
+            cin >> ws;
+            getline(cin, name);
             auto it = villagers.find(name);
             if (it != villagers.end()) {
                 auto [f, s, c] = it->second;
@@ -71,7 +102,7 @@ int main() {
             }
             displayVillagers(villagers);
         }
-           else if (choice == 4) {
+           else if (choice == 6) {
             cout << "Exiting program." << endl;
         }
 
