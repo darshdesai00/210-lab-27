@@ -63,6 +63,17 @@ int main() {
             displayVillagers(villagers);
         }
 
+        else if (choice == 2) {
+            cout << "Enter villager name to delete: ";
+            cin >> ws;
+            getline(cin, name);
+            if (villagers.erase(name))
+                cout << name << " deleted." << endl;
+            else
+                cout << name << " not found." << endl;
+            displayVillagers(villagers);
+        }
+
             if (choice == 3) {
             cout << "Enter villager name to increase friendship: ";
             cin >> ws;
@@ -110,7 +121,7 @@ int main() {
             cout << "Invalid choice. Try again.\n";
         }
 
-    } while (choice != 4);
+    } while (choice != 6);
 
     return 0;
 }    
