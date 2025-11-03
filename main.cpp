@@ -62,9 +62,9 @@ int main() {
             else if (choice == 3) {
             cout << "Enter villager name to search: ";
             cin >> name;
-            auto it = villager.find(name);
+            auto it = villagers.find(name);
             if (it != villagers.end()) {
-                auto [f, s, ] = it->second;
+                auto [f, s, c] = it->second;
                 cout << "Found " << name << ": [" << f << ", " << s << ", " << c << "]" << endl;
             } else {
                 cout << name << " not found." << endl;
@@ -79,7 +79,7 @@ int main() {
             cout << "Invalid choice. Try again.\n";
         }
 
-    } while (choice = 4);
+    } while (choice != 4);
 
     return 0;
 }    
