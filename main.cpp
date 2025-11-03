@@ -8,9 +8,9 @@ using namespace std;
 void displayVillagers(map<string, tuple<int, string, string>> &villagers) {
     cout << "\nVillager details:" << endl;
     for (auto &pair : villagers) {
-        auto [friendship, species, catchphrase] = pair.second;
-        cout << pair.first << " [" << friendship << ", "
-             << species << ", " << catchphrase << "]" << endl;
+    auto [friendship, species, catchphrase] = pair.second;
+    cout << pair.first << " [" << friendship << ", "
+    << species << ", " << catchphrase << "]" << endl;
     }
 }
 
@@ -55,47 +55,33 @@ int main() {
                 if (friendship > 0) friendship--;
                 cout << name << "'s friendship decreased to " << friendship << "!" << endl;
             } else {
-
+                cout << name << " not found." << endl;
             }
+            displayVillagers(villagers);
+        }
+            else if (choice == 3) {
+            cout << "Enter villager name to search: ";
+            cin >> name;
+            auto it = villager.find(name);
+            if (it != villagers.end()) {
+                auto [f, s, ] = it->second;
+                cout << "Found " << name << ": [" << f << ", " << s << ", " << c << "]" << endl;
+            } else {
+                cout << name << " not found." << endl;
+            }
+            displayVillagers(villagers);
+        }
+           else if (choice == 4) {
+            cout << "Exiting program." << endl;
+        }
 
-           
-    // access the map using a range-based for loop
-    cout << "Villager details (range-based for loop):" << endl;
-    for (auto pair : villagers) {
-        auto [friendship, species, catchphrase] = pair.second;
-        cout << pair.first << " [" << friendship << ", "
-             << species << ", " << catchphrase << "]" << endl;
-    }
+        else {
+            cout << "Invalid choice. Try again.\n";
+        }
 
-    // access the map using iterators
-    cout << "\nVillagers details (iterators):" << endl;
-    for (map<string, tuple<int, string, string>>::iterator it = villagers.begin(); 
-        it != villagers.end(); ++it) {
-        int friendship;
-        strig pecies, catchphrase;
-        tie(friendship, species, catchphrase) = it->second;
-        cout << it->first << " [" << friendship << ", "
-             << species << ", " << catchphrase << "]" << endl;
-    }    
-
-    // delete an element
-    villagers.erase("Raymond");
-
-    // search for an element
-    string searchKey = "Audie";
-    auto it = villagers.find(searchKey);
-    if (it != villagers.end()) {
-        auto [f, s, c] = it->second;
-        cout << "\nFound " << searchKey << ": [" << f << ", "
-             << s << ", " << c << "]" << endl;
-    } else {
-        cout << "\n" << searchKey << " not found." << endl;
-    }
-
-    // report size, clear, report size again
-    cout << "\nSize before clear: " << villagers.size() << endl;
-    villagers.clear();
-    cout << "Size after clear: " << villagers.size() << endl;
+    } while (choice = 4);
 
     return 0;
-}
+}    
+
+    
